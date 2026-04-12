@@ -17,12 +17,13 @@
       "url": "https://registry.npmjs.com"
     },
     "com.unipotent.kokorosharpunity": {
-      "version": "file:com.unipotent.kokorosharpunity",
+      "version": "https://github.com/unipotent/KokoroSharpUnity.git",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
         "com.github.asus4.onnxruntime": "0.4.0"
-      }
+      },
+      "hash": "554c775e4e00a9109bc8214bf904f480920e084f"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.11",

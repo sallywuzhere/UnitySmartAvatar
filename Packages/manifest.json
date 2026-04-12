@@ -1,14 +1,17 @@
 {
-    "scopedRegistries": [
+  "scopedRegistries": [
     {
       "name": "NPM",
       "url": "https://registry.npmjs.com",
-      "scopes": [ "com.github.asus4" ]
+      "scopes": [
+        "com.github.asus4"
+      ]
     }
   ],
   "dependencies": {
     "com.github.asus4.onnxruntime": "0.4.4",
     "com.github.asus4.onnxruntime.unity": "0.4.4",
+    "com.unipotent.kokorosharpunity": "https://github.com/unipotent/KokoroSharpUnity.git",
     "com.unity.ai.navigation": "2.0.11",
     "com.unity.collab-proxy": "2.11.4",
     "com.unity.ide.rider": "3.0.39",
