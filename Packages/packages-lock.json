@@ -7,14 +7,15 @@
       "dependencies": {},
       "url": "https://registry.npmjs.com"
     },
-    "com.github.asus4.onnxruntime.unity": {
-      "version": "0.4.4",
+    "com.hecomi.ulipsync": {
+      "version": "https://github.com/hecomi/uLipSync.git#upm",
       "depth": 0,
-      "source": "registry",
+      "source": "git",
       "dependencies": {
-        "com.github.asus4.onnxruntime": "0.4.4"
+        "com.unity.burst": "1.4.11",
+        "com.unity.mathematics": "1.2.5"
       },
-      "url": "https://registry.npmjs.com"
+      "hash": "ece3272762f2148dd8d3e658ec04fcbd79d4d97e"
     },
     "com.unipotent.kokorosharpunity": {
       "version": "https://github.com/unipotent/KokoroSharpUnity.git",
@@ -25,18 +26,22 @@
       },
       "hash": "554c775e4e00a9109bc8214bf904f480920e084f"
     },
-    "com.unity.ai.navigation": {
-      "version": "2.0.11",
+    "com.unity.ai.inference": {
+      "version": "2.5.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.ai": "1.0.0"
+        "com.unity.burst": "1.8.17",
+        "com.unity.dt.app-ui": "1.3.3",
+        "com.unity.collections": "2.4.3",
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.modules.imageconversion": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
       "version": "1.8.28",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
@@ -53,7 +58,7 @@
     },
     "com.unity.collections": {
       "version": "2.6.5",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.8.27",
@@ -61,6 +66,18 @@
         "com.unity.test-framework": "1.4.6",
         "com.unity.nuget.mono-cecil": "1.11.6",
         "com.unity.test-framework.performance": "3.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.dt.app-ui": {
+      "version": "2.1.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.modules.screencapture": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -99,7 +116,7 @@
     },
     "com.unity.mathematics": {
       "version": "1.3.3",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -114,7 +131,14 @@
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.6",
-      "depth": 3,
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.2",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -179,7 +203,7 @@
     },
     "com.unity.test-framework.performance": {
       "version": "3.2.0",
-      "depth": 3,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.1.33",
@@ -188,7 +212,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.8.11",
+      "version": "1.8.12",
       "depth": 0,
       "source": "registry",
       "dependencies": {
