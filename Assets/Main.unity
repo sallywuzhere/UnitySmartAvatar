@@ -205,8 +205,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.008682933, y: 0.99059093, z: -0.11373023, w: -0.07562852}
+  m_LocalPosition: {x: 0.1152118, y: 1.5449098, z: 0.5422857}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -383,65 +383,152 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &1748584302
-GameObject:
+--- !u!1001 &1627452095
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_Name
+      value: UnityKun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826314578457976608, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826314578457976608, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531127399484668800, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[2]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531127399484668800, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[80]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531127399484668800, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[86]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5531127399484668800, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: 'm_BlendShapeWeights.Array.data[107]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993763474934528456, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993763474934528456, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049025689171792533, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627452097}
+    - targetCorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627452099}
+    - targetCorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627452100}
+    - targetCorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627452101}
+    - targetCorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627452104}
+    - targetCorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627452103}
+    - targetCorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1627452102}
+  m_SourcePrefab: {fileID: 100100000, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+--- !u!1 &1627452096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3900932639812134863, guid: 6d044d413ab4e9c49a7e730f2b07dfdf, type: 3}
+  m_PrefabInstance: {fileID: 1627452095}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1748584305}
-  - component: {fileID: 1748584304}
-  - component: {fileID: 1748584306}
-  - component: {fileID: 1748584307}
-  m_Layer: 0
-  m_Name: KOKORO
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1748584304
+--- !u!114 &1627452097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748584302}
+  m_GameObject: {fileID: 1627452096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee4b77bc69ef847469da8eb007098435, type: 3}
+  m_Script: {fileID: 11500000, guid: 87560e04aa74c7a41acb9c87051c3b02, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestKokoro
---- !u!4 &1748584305
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748584302}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1748584306
+  m_EditorClassIdentifier: uLipSync.Runtime::uLipSync.uLipSync
+  profile: {fileID: 11400000, guid: 928ef2760e633423da4cb17d59676ee1, type: 2}
+  onLipSyncUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  outputSoundGain: 1
+  audioSourceProxy: {fileID: 0}
+--- !u!82 &1627452099
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748584302}
+  m_GameObject: {fileID: 1627452096}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -526,23 +613,90 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1748584307
+--- !u!114 &1627452100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748584302}
+  m_GameObject: {fileID: 1627452096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84c704bcd1f44485a0916065c5a50d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRMBlendshapeMapper
+  lipSyncSource: {fileID: 1627452097}
+  smoothing: 0.95
+--- !u!114 &1627452101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627452096}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64bede44d27d95a4b94442874bf233b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: com.unipotent.kokorosharpunity::KokoroSharpUnity.KokoroUnity
-  UnityAudioSource: {fileID: 1748584306}
+  UnityAudioSource: {fileID: 1627452099}
+--- !u!114 &1627452102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627452096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 221a2b13f10094c7791d8376c8471fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Whisper
+  _jsonFile: {fileID: 4900000, guid: e2532ad59a8c658449d47d3b2a356b3d, type: 3}
+  _audioDecoder1: {fileID: 5022602860645237092, guid: a95853f07f76043c6a08977a2ac3f715, type: 3}
+  _audioDecoder2: {fileID: 5022602860645237092, guid: d2090ef31f860458881d0aae03a6a010, type: 3}
+  _audioEncoder: {fileID: 5022602860645237092, guid: a05fd23defbe946ad9c26496b3842e1d, type: 3}
+  _logMelSpectro: {fileID: 5022602860645237092, guid: 4e3f1e2bcd4a847d7ad57528545ffc01, type: 3}
+--- !u!114 &1627452103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627452096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4353fd233da3485db3dd6d592c49d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LLM
+  apiUrl: http://localhost:4891/v1/chat/completions
+  model: gpt-3.5-turbo
+  maxTokens: 200
+  maxHistoryLength: 10
+  characterPrompt: You're a virtual avatar, the male mascot of Unity, and the user's
+    personal butler. You use british slang incessantly. You are sassy and fun, you
+    speak in GenZ lingo and brainrot. You love making video games in Unity game engine.
+    Keep responses to 10 words or less.
+--- !u!114 &1627452104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627452096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4b77bc69ef847469da8eb007098435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestKokoro
+  _whisper: {fileID: 1627452102}
+  _llm: {fileID: 1627452103}
+  _maxRecordingSeconds: 30
+  _voiceName: bm_fable
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
   - {fileID: 410087041}
-  - {fileID: 1748584305}
+  - {fileID: 1627452095}
