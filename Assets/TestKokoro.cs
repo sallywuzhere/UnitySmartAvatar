@@ -99,6 +99,6 @@ public class TestKokoro : MonoBehaviour
         if (string.IsNullOrWhiteSpace(reply)) return;
 
         // TTS
-        _kokoroTTS.SpeakFast(reply, _voice);
+        _kokoroTTS.Speak(reply, _voice);
     }
 }
