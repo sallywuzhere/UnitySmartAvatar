@@ -12,8 +12,13 @@
 /[Uu]ser[Ss]ettings/
 *.log
 
+# Large data objects which we get from hugging face etc
 [Aa]ssets/StreamingAssets/Kokoro/kokoro.onnx
 [Aa]ssets/StreamingAssets/Kokoro/voices/
+[Aa]ssets/Data/Models/decoder_model.onnx
+[Aa]ssets/Data/Models/decoder_with_past_model.onnx
+[Aa]ssets/Data/Models/encoder_model.onnx
+[Aa]ssets/Data/Models/logmel_spectrogram.onnx
 
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
 *.blend1
@@ -59,6 +64,8 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+
+.DS_Store
 
 # Unity3D generated meta files
 *.pidb.meta

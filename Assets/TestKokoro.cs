@@ -1,47 +1,104 @@
-using UnityEngine;
+using System.Threading.Tasks;
 using KokoroSharp;
 using KokoroSharp.Core;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Push-to-talk voice loop:
+//   hold Space → record mic
+//   release     → Whisper (STT) → LLM → Kokoro (TTS)
 public class TestKokoro : MonoBehaviour
 {
+    [Header("AI Components")]
+    [SerializeField] private Whisper _whisper;
+    [SerializeField] private LLM _llm;
+
+    [Header("Mic")]
+    [Tooltip("Max seconds captured per utterance. Whisper truncates at 30s anyway.")]
+    [SerializeField] private int _maxRecordingSeconds = 30;
+
+    [Header("Voice")]
+    [Tooltip("Exact Kokoro voice name to use (e.g. af_bella). Leave blank to pick the first American English voice.")]
+    [SerializeField] private string _voiceName = "";
+
+    // Whisper expects mono 16 kHz audio
+    private const int MIC_SAMPLE_RATE = 16000;
+
     private KokoroTTS _kokoroTTS;
-    private int _currVoiceIndex = 0;
-    private KokoroVoice[] _allVoices;
-    private KokoroLanguage[] _allLanguages;
+    private KokoroVoice _voice;
+    private AudioClip _micClip;
+    private string _micDevice;
+    private bool _isRecording;
 
     void Start()
     {
+        // Load Kokoro + pick a voice
         _kokoroTTS = KokoroTTS.LoadModel();
-        _allLanguages = new KokoroLanguage[] { KokoroLanguage.AmericanEnglish,
-                                                KokoroLanguage.BritishEnglish,
-                                                KokoroLanguage.Japanese,
-                                                KokoroLanguage.MandarinChinese,
-                                                KokoroLanguage.Spanish,
-                                                KokoroLanguage.French,
-                                                KokoroLanguage.Hindi,
-                                                KokoroLanguage.Italian,
-                                                KokoroLanguage.BrazilianPortuguese };
-        _allVoices = KokoroVoiceManager.GetVoices(_allLanguages, KokoroGender.Both).ToArray();
+        _voice = string.IsNullOrEmpty(_voiceName)
+            ? KokoroVoiceManager.GetVoices(KokoroLanguage.AmericanEnglish)[0]
+            : KokoroVoiceManager.GetVoice(_voiceName);
+        Debug.Log($"[Kokoro] Using voice: {_voice.Name}");
 
-        Debug.Log("Press Space to cycle through all available voices and Speak().");
-        Speak();
+        // Pick mic device
+        if (Microphone.devices.Length == 0)
+        {
+            Debug.LogError("No microphone detected — voice loop disabled.");
+            return;
+        }
+        _micDevice = Microphone.devices[0];
+        Debug.Log($"[Mic] Using device: {_micDevice}");
+
+        Debug.Log("Hold SPACE to talk. Release to hear the avatar respond.");
     }
 
     void Update()
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            Speak();
+            StartRecording();
+        }
+        else if (Keyboard.current.spaceKey.wasReleasedThisFrame && _isRecording)                                                                                                                      
+        {
+            _ = RunLoop();
         }
     }
 
-    void Speak()
-    {
-        KokoroVoice voice = KokoroVoiceManager.GetVoice(_allVoices[_currVoiceIndex].Name);
-        Debug.Log("Voice: " + voice.Name);
-        _kokoroTTS.SpeakFast("Hello world", voice);
+    private async Task RunLoop()
+    {                                                                                                                                                                                             
+        try
+        {
+            await StopRecordingAndProcess();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Voice loop failed: {e}");
+        }
+    } 
 
-        _currVoiceIndex = (_currVoiceIndex + 1) % _allVoices.Length;
+    private void StartRecording()
+    {
+        _micClip = Microphone.Start(_micDevice, loop: false, _maxRecordingSeconds, MIC_SAMPLE_RATE);
+        _isRecording = true;
+        Debug.Log("[Mic] Recording...");
+    }
+
+    private async Task StopRecordingAndProcess()
+    {
+        Microphone.End(_micDevice);
+        _isRecording = false;
+        Debug.Log("[Mic] Stopped. Transcribing...");
+
+        // STT
+        string userText = await _whisper.GetTranscription(_micClip);
+        Debug.Log($"[Whisper] You said: \"{userText}\"");
+        if (string.IsNullOrWhiteSpace(userText)) return;
+
+        // LLM
+        string reply = await _llm.GetResponse(userText);
+        Debug.Log($"[LLM] Replied: \"{reply}\"");
+        if (string.IsNullOrWhiteSpace(reply)) return;
+
+        // TTS
+        _kokoroTTS.Speak(reply, _voice);
     }
 }
