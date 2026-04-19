@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-BASE_URL="https://huggingface.co/unity/inference-engine-whisper-tiny/blob/main/models"
+BASE_URL="https://huggingface.co/unity/inference-engine-whisper-tiny/resolve/main/models"
 DEST_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/Assets/Data/Models"
 
 FILES=(
