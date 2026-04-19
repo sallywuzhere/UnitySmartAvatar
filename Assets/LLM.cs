@@ -10,11 +10,17 @@ using UnityEngine.Networking;
 // but any OpenAI-shaped endpoint works (e.g. Ollama, LM Studio, vLLM).
 public class LLM : MonoBehaviour
 {
-    [Tooltip("OpenAI-compatible endpoint. GPT4All default is http://localhost:4891/v1/chat/completions")]
-    [SerializeField] private string apiUrl = "http://localhost:4891/v1/chat/completions";
+    // Note, if you're having trouble connecting, make sure you go to Settings > Application > Enable Local API Server
+    // You can test outside of Unity as well by sending a chat command using curl:
+    // curl -X POST http://127.0.0.1:4891/v1/chat/completions -H "Content-Type: application/json" -d "{\"model\":\"gpt-3.5-turbo\",\"max_tokens\":200, \"messages\":[{\"role\":\"user\",\"content\":\"hi bruv whats new\"}]}"
+    [Tooltip("OpenAI-compatible endpoint. GPT4All default is http://127.0.0.1:4891/v1/chat/completions")]
+    [SerializeField] private string apiUrl = "http://127.0.0.1:4891/v1/chat/completions";
 
+    // To see what models are availble, run this in your shell after installing GPT4ALLL:
+    // curl -v http://127.0.0.1:4891/v1/models
+    // you'll see the model id for each model entry in the "data" array.
     [Tooltip("Model name passed to the endpoint. For GPT4All this should match an installed model.")]
-    [SerializeField] private string model = "gpt-3.5-turbo";
+    [SerializeField] private string model = "Llama 3.2 1B Instruct";
 
     [Tooltip("Max tokens per response.")]
     [SerializeField] private int maxTokens = 200;

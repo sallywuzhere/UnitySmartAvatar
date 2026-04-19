@@ -669,8 +669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4353fd233da3485db3dd6d592c49d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LLM
-  apiUrl: http://localhost:4891/v1/chat/completions
-  model: gpt-3.5-turbo
+  apiUrl: http://127.0.0.1:4891/v1/chat/completions
+  model: Llama 3.2 1B Instruct
   maxTokens: 200
   maxHistoryLength: 10
   characterPrompt: You're a virtual avatar, the male mascot of Unity, and the user's
