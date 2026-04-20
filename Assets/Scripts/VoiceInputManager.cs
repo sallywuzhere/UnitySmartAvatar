@@ -12,6 +12,8 @@ public class VoiceInputManager : MonoBehaviour
     // LLM running locally, to generate a response to the user's input,
     // which was converted from voice to text.
     [SerializeField] private LLM _llm;
+    // Control what we are looking at
+    [SerializeField] private IdleLookAround _idleLookAround;
     
     // Text to Speech setup
     private KokoroTTS _kokoroTTS;
@@ -76,7 +78,9 @@ public class VoiceInputManager : MonoBehaviour
     {
         _inputAudioClip = Microphone.Start(_micDeviceName, loop: false, MAX_RECORDING_LENGTH_SECONDS, MIC_SAMPLE_RATE);
         _isRecording = true;
-        
+
+        _idleLookAround.StartLookingAtCamera();
+
         Debug.Log("[VoiceInputManager] Recording started. Speak now...");
     }
 
@@ -85,6 +89,8 @@ public class VoiceInputManager : MonoBehaviour
         // Stop recording user input
         Microphone.End(_micDeviceName);
         _isRecording = false;
+
+        _idleLookAround.StopLookingAtCamera(delaySeconds: 10);
 
         // Process user input from speech to text
         Debug.Log("[VoiceInputManager] Recording stopped. Processing Speech to Text.");
@@ -107,8 +113,8 @@ public class VoiceInputManager : MonoBehaviour
             return;
         }
 
-        // Kokoro cannot pronounce apostrophes, so remove them :(
+        // Kokoro cannot pronounce apostrophes or asterisks, so remove them :(
         Debug.Log("[VoiceInputManager] Generating voice and speaking reply!");
-        _kokoroTTS.Speak(reply.Replace("'", ""), _voice);
+        _kokoroTTS.Speak(reply.Replace("'", "").Replace("*", ""), _voice);
     }
 }

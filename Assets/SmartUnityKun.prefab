@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5984645621279132445}
   - component: {fileID: 9126004159896848252}
   - component: {fileID: 3966294097851700968}
+  - component: {fileID: 5061761749235985463}
   m_Layer: 0
   m_Name: SmartUnityKun
   m_TagString: Untagged
@@ -54,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TestKokoro
   _speechToText: {fileID: 6695263771902520984}
   _llm: {fileID: 7884185485667311841}
+  _idleLookAround: {fileID: 5061761749235985463}
 --- !u!114 &6695263771902520984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,10 +90,9 @@ MonoBehaviour:
   maxTokens: 200
   maxHistoryLength: 10
   characterPrompt: You use british slang incessantly, such as "innit" and "mate".
-    You speak in GenZ slang and brainrot. You love making tea and watching rugby.
-    You are sassy and fun. NEVER describe the actions you are performing using *asterisks*.
-    Never roleplay, never use contractions or abbreviations. Keep responses to 10
-    words or less.
+    You love making tea and watching rugby. You are sassy and fun. NEVER describe
+    the actions you are performing using *asterisks*. Never roleplay, never use contractions
+    or abbreviations. Keep responses to 10 words or less.
 --- !u!114 &6795550519681383950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +251,33 @@ MonoBehaviour:
   _animator: {fileID: 8768969813100067024}
   _speechToText: {fileID: 6695263771902520984}
   _llm: {fileID: 7884185485667311841}
+--- !u!114 &5061761749235985463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483883041577095564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff7fbb8e40d97f040a010db1e632883e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IdleLookAround
+  headBone: {fileID: 2502422707019661296}
+  leftEyeBone: {fileID: 8938516947511909454}
+  rightEyeBone: {fileID: 3722235574718815657}
+  gazeDistance: 1
+  horizontalRange: 30
+  verticalRange: 10
+  headContribution: 0.7
+  headSmoothSpeed: 2.5
+  maxHeadYaw: 30
+  maxHeadPitch: 15
+  eyeSmoothSpeed: 8
+  maxEyeYaw: 30
+  maxEyePitch: 10
+  minHoldTime: 1.2
+  maxHoldTime: 10
 --- !u!1001 &2944006413685572929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315,13 +343,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f9f2747b822eb445a5f680c7ee7a03d, type: 3}
+--- !u!4 &2502422707019661296 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 747969231759637169, guid: 2f9f2747b822eb445a5f680c7ee7a03d, type: 3}
+  m_PrefabInstance: {fileID: 2944006413685572929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3409663903415542442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2f9f2747b822eb445a5f680c7ee7a03d, type: 3}
   m_PrefabInstance: {fileID: 2944006413685572929}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3722235574718815657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7245377330877785880, guid: 2f9f2747b822eb445a5f680c7ee7a03d, type: 3}
+  m_PrefabInstance: {fileID: 2944006413685572929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &8768969813100067024 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 2f9f2747b822eb445a5f680c7ee7a03d, type: 3}
+  m_PrefabInstance: {fileID: 2944006413685572929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8938516947511909454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3111763102078412529, guid: 2f9f2747b822eb445a5f680c7ee7a03d, type: 3}
   m_PrefabInstance: {fileID: 2944006413685572929}
   m_PrefabAsset: {fileID: 0}
