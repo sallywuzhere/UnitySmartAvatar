@@ -23,14 +23,14 @@ python3 getVoices.py
 This fetches every voice from [hexgrad/Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) via the HuggingFace API, converts them from PyTorch `.pt` to the `.npy` format KokoroSharpUnity requires, and drops them in `Assets/StreamingAssets/Kokoro/voices`.
 
 # Local Speech to Text setup
-Whisper is our local, offline Speech to Text solution.
+Whisper is our local, offline Speech to Text model for Unity Inference Engine.
 1. Download the model weights (~400 MB, gitignored):
    ```bash
    ./download_models.sh
    ```
    This fetches four `.onnx` files from [huggingface.co/unity/sentis-whisper-tiny](https://huggingface.co/unity/sentis-whisper-tiny) into `Assets/Data/Models/`.
 
-2. Find the UnityKun preab; In the inspector, set these references:
+2. Find the SmartUnityKun prefab; In the inspector, set these references:
    - `Audio Encoder` / `Audio Decoder 1` / `Audio Decoder 2` / `Log Mel Spectro` → the four `.onnx` files you just downloaded
 
 # Local LLM setup
@@ -39,4 +39,5 @@ The `LLM` component is the 'thinking brain' that takes user input and gives bot 
 
 We are using Gpt4All. To install it to your machine:
 - **GPT4All** — [nomic.ai/gpt4all](https://www.nomic.ai/gpt4all) (default; runs on `http://localhost:4891`)
-- Install this, and run a local session. Get to a point where you're chatting in the local Gpt4All interface, and you should be good!
+- Install this, and run a local session. Select a model, and get to a point where you're chatting in the local Gpt4All interface.
+- Turn on API support: `Settings > Application > Enable Local API Server` so that Unity can connect via local command line!
