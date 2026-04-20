@@ -4,7 +4,7 @@ This project demonstrates a Smart Avatar in Unity. The Smart Avatar can be run c
 ## Installation Instructions
 - Install Unity Hub: https://docs.unity.com/en-us/hub/install-hub
     - Use the Hub to install Unity 6000.3.13f1 (or latest LTS)
-        - Optional: Install Android support for Unity to avoid an error later
+        - Optional: Install Android support for Unity to avoid an error later**
 - Install VSCode (or equivalent IDE)
     - Once loaded, install Unity plugin
 - Install GPT4All v3.10.0 or newer: https://www.nomic.ai/gpt4all
@@ -19,10 +19,11 @@ This project demonstrates a Smart Avatar in Unity. The Smart Avatar can be run c
         - The will save to `Assets/Data/Models` within UnitySmartAvatar
         - These are the models needed to run Speech to Text
     - Open UnitySmartAvatar project via the Unity Hub
-        - If you see an error message, hit Ignore
+        - **If you see an Error pop-up message, hit Ignore. These are the Android errors mentioned earlier.
         - If you launch the project and see this error in the Console:
             - `Library\PackageCache\com.unipotent.kokorosharpunity@554c775e4e00\Runtime\KokoroSharp\Processing\Tokenizer.cs(10,13): error CS0234: The type or namespace name 'Android' does not exist in the namespace 'Unity' (are you missing an assembly reference?)`
             - Double click the message to open Tokenizer.cs; commend out line 10, `//using Unity.Android.Gradle;`
+            - We do not need Android support!
         - Open Main.unity
         - Find the SmartUnityKun prefab; In the inspector, set these references on the SpeechToText component:
             - `Audio Encoder` / `Audio Decoder 1` / `Audio Decoder 2` / `Log Mel Spectro` must be set to the four `.onnx` files you downloaded via `download_models.sh`
