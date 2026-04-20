@@ -77,7 +77,7 @@ public class RoundTripTest : MonoBehaviour
         }
         else if (Keyboard.current.spaceKey.wasReleasedThisFrame && _isRecording)                                                                                                                      
         {
-            StopRecording();
+            _ = StopRecording();
         }
     } 
 
