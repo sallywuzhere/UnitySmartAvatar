@@ -11,6 +11,7 @@
   "dependencies": {
     "com.github.asus4.onnxruntime": "0.4.4",
     "com.hecomi.ulipsync": "https://github.com/hecomi/uLipSync.git#upm",
+    "com.sallywuzhere.unitykun": "https://github.com/sallywuzhere/UnityKun.git?path=Packages/com.sallywuzhere.unitykun",
     "com.unipotent.kokorosharpunity": "https://github.com/unipotent/KokoroSharpUnity.git",
     "com.unity.ai.inference": "2.6.0",
     "com.unity.collab-proxy": "2.12.4",

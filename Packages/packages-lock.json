@@ -17,6 +17,13 @@
       },
       "hash": "ece3272762f2148dd8d3e658ec04fcbd79d4d97e"
     },
+    "com.sallywuzhere.unitykun": {
+      "version": "https://github.com/sallywuzhere/UnityKun.git?path=Packages/com.sallywuzhere.unitykun",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "af0473abeb0f0d965a8b3508b1684fab15d588e4"
+    },
     "com.unipotent.kokorosharpunity": {
       "version": "https://github.com/unipotent/KokoroSharpUnity.git",
       "depth": 0,

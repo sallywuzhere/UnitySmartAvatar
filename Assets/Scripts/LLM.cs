@@ -48,9 +48,7 @@ public class LLM : MonoBehaviour
 
     public async Task<string> GetResponse(string userMessage)
     {
-        Debug.Log("Sending message to LLM: " + userMessage);
         string response = await SendRequestAsync(userMessage);
-        Debug.Log("LLM response: " + response);
         OnResponseReceived?.Invoke(response);
         return response;
     }

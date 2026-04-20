@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Unity.Collections;
 using UnityEngine;
 
-// Formerly called Whisper, now called InferenceEngine.
-public class Whisper : MonoBehaviour
+// Original implementation of InferenceEngine-based Speech to Text, adapted from the HuggingFace Whisper Tiny example:
+// https://huggingface.co/unity/inference-engine-whisper-tiny/blob/main/RunWhisper.cs
+public class SpeechToText : MonoBehaviour
 {
     public Action<string> AudioTranscribed;
 
@@ -17,25 +18,25 @@ public class Whisper : MonoBehaviour
     [SerializeField] private Unity.InferenceEngine.ModelAsset _audioEncoder;
     [SerializeField] private Unity.InferenceEngine.ModelAsset _logMelSpectro;
 
-    // WHISPER WORKERS
+    // InferenceEngine WORKERS
     // 
     // A spectrogram is a visual representation of sound frequencies over time. It shows:
-    // X-axis → Time
-    // Y-axis → Frequency (pitch)
-    // Color/Intensity → Amplitude (loudness)
+    // X-axis: Time
+    // Y-axis: Frequency (pitch)
+    // Color/Intensity: Amplitude (loudness)
     // Since raw audio data (a waveform) is too complex for AI to understand directly,
     // we convert it into a spectrogram, which represents how frequencies evolve over time!
     private Unity.InferenceEngine.Worker _decoder1, _decoder2, _encoder, _spectrogram;
     private Unity.InferenceEngine.Worker _argmax;
 
-    // Whisper enums
+    // InferenceEngine enums
     private const int CHATGPT_MAX_TOKENS = 100;
-    private const int WHISPER_END_OF_TEXT = 50257;
-    private const int WHISPER_START_OF_TRANSCRIPT = 50258;
-    private const int WHISPER_ENGLISH = 50259;
-    private const int WHISPER_TRANSCRIBE = 50359;
-    private const int WHISPER_NO_TIME_STAMPS = 50363;
-    private const int WHISPER_START_TIME = 50364;
+    private const int INFERRENCE_ENGINE_END_OF_TEXT = 50257;
+    private const int INFERRENCE_ENGINE_START_OF_TRANSCRIPT = 50258;
+    private const int INFERRENCE_ENGINE_ENGLISH = 50259;
+    private const int INFERRENCE_ENGINE_TRANSCRIBE = 50359;
+    private const int INFERRENCE_ENGINE_NO_TIME_STAMPS = 50363;
+    private const int INFERRENCE_ENGINE_START_TIME = 50364;
 
     private int[] _whiteSpaceCharacters = new int[256];
     private string[] _vocabTokens;
@@ -58,20 +59,18 @@ public class Whisper : MonoBehaviour
     {
         SetupTokensFromVocabFile(_jsonFile);
         SetupWhiteSpaceShifts();
-        
-        Debug.Log("Created new Whisper instance.");
     }
 
     public async Task<string> GetTranscription(AudioClip audioClip)
     {
         if(_isTranscribingInputAudio)
         {
-            Debug.LogWarning("You have requested BeginTranscription, but a transcription is already in progress.");
+            Debug.LogWarning("[SpeechToText] You have requested BeginTranscription, but a transcription is already in progress.");
             return "";
         }
 
         // Setup workers
-        SetupWhisperWorkers();
+        SetupInferenceEngineWorkers();
 
         // Prepare input to be processed
         EncodeAudioClip(audioClip);
@@ -80,13 +79,13 @@ public class Whisper : MonoBehaviour
         await BeginTranscription();
 
         // Clean up transcription related stuff for more input
-        CleanupWhisperWorkers();
+        CleanupInferenceEngineWorkers();
 
         // Return the string we've built across multiple inference steps
         return _audioInputTranscription;
     }
 
-    private void SetupWhisperWorkers()
+    private void SetupInferenceEngineWorkers()
     {
         _decoder1 = new Unity.InferenceEngine.Worker(Unity.InferenceEngine.ModelLoader.Load(_audioDecoder1), Unity.InferenceEngine.BackendType.GPUCompute);
         _decoder2 = new Unity.InferenceEngine.Worker(Unity.InferenceEngine.ModelLoader.Load(_audioDecoder2), Unity.InferenceEngine.BackendType.GPUCompute);
@@ -101,15 +100,15 @@ public class Whisper : MonoBehaviour
 
         // Setup transcribed token native array
         _transcribedTokens = new NativeArray<int>(CHATGPT_MAX_TOKENS, Allocator.Persistent);
-        _transcribedTokens[0] = WHISPER_START_OF_TRANSCRIPT;
-        _transcribedTokens[1] = WHISPER_ENGLISH;
-        _transcribedTokens[2] = WHISPER_TRANSCRIBE;
+        _transcribedTokens[0] = INFERRENCE_ENGINE_START_OF_TRANSCRIPT;
+        _transcribedTokens[1] = INFERRENCE_ENGINE_ENGLISH;
+        _transcribedTokens[2] = INFERRENCE_ENGINE_TRANSCRIBE;
         _transcribedTokenCount = 3;
     }
 
-    private void CleanupWhisperWorkers()
+    private void CleanupInferenceEngineWorkers()
     {
-        // Whisper worker disposal
+        // InferenceEngine worker disposal
         _decoder1.Dispose();
         _decoder2.Dispose();
         _encoder.Dispose();
@@ -123,8 +122,14 @@ public class Whisper : MonoBehaviour
         _encodedAudio?.Dispose();
 
         // Native Array disposal
-        if (_transcribedTokens.IsCreated) _transcribedTokens.Dispose();
-        if (_lastToken.IsCreated) _lastToken.Dispose();
+        if (_transcribedTokens.IsCreated)
+        {
+            _transcribedTokens.Dispose();   
+        }
+        if (_lastToken.IsCreated)
+        {
+            _lastToken.Dispose();
+        }
     }
 
     private void EncodeAudioClip(AudioClip audioClip)
@@ -163,14 +168,13 @@ public class Whisper : MonoBehaviour
         _transcribedTokensTensor.dataOnBackend.Upload<int>(_transcribedTokens, _transcribedTokenCount);
 
         _lastToken = new NativeArray<int>(1, Allocator.Persistent);
-        _lastToken[0] = WHISPER_NO_TIME_STAMPS;
-        _lastTokenTensor = new Unity.InferenceEngine.Tensor<int>(new Unity.InferenceEngine.TensorShape(1, 1), new[] { WHISPER_NO_TIME_STAMPS });
+        _lastToken[0] = INFERRENCE_ENGINE_NO_TIME_STAMPS;
+        _lastTokenTensor = new Unity.InferenceEngine.Tensor<int>(new Unity.InferenceEngine.TensorShape(1, 1), new[] { INFERRENCE_ENGINE_NO_TIME_STAMPS });
 
         while (true)
         {
             if (!_isTranscribingInputAudio || _transcribedTokenCount >= (_transcribedTokens.Length - 1))
             {
-                Debug.Log("Transcribed user audio: " + _audioInputTranscription);
                 AudioTranscribed?.Invoke(_audioInputTranscription);
                 return;
             }
@@ -192,7 +196,10 @@ public class Whisper : MonoBehaviour
     {
         for (int i = 0, n = 0; i < 256; i++)
         {
-            if (IsWhiteSpace((char)i)) _whiteSpaceCharacters[n++] = i;
+            if (IsWhiteSpace((char)i))
+            {
+                _whiteSpaceCharacters[n++] = i;
+            }
         }
     }
 
@@ -254,7 +261,7 @@ public class Whisper : MonoBehaviour
         _transcribedTokensTensor.dataOnBackend.Upload<int>(_transcribedTokens, _transcribedTokenCount);
         _lastTokenTensor.dataOnBackend.Upload<int>(_lastToken, 1);
 
-        if (index == WHISPER_END_OF_TEXT)
+        if (index == INFERRENCE_ENGINE_END_OF_TEXT)
         {
             _isTranscribingInputAudio = false;
         }
@@ -262,8 +269,6 @@ public class Whisper : MonoBehaviour
         {
             _audioInputTranscription += GetUnicodeText(_vocabTokens[index]);
         }
-
-        //Debug.Log(_audioInputTranscription);
     }
 
     private string GetUnicodeText(string text)
