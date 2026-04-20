@@ -34,6 +34,8 @@ public class LLM : MonoBehaviour
         "You are a helpful, friendly assistant voiced by a Unity avatar. " +
         "Keep responses to 15 words or less. Be engaging and conversational.";
 
+    public event Action<string> OnResponseReceived;
+
     private List<Message> _conversationHistory;
 
     private void Awake()
@@ -49,6 +51,7 @@ public class LLM : MonoBehaviour
         Debug.Log("Sending message to LLM: " + userMessage);
         string response = await SendRequestAsync(userMessage);
         Debug.Log("LLM response: " + response);
+        OnResponseReceived?.Invoke(response);
         return response;
     }
 

@@ -356,7 +356,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: J_Sec_Hair2_05
+    - boneName: Eye_L
       humanName: LeftEye
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -364,7 +364,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: J_Sec_Hair1_11
+    - boneName: Eye_R
       humanName: RightEye
       limit:
         min: {x: 0, y: 0, z: 0}

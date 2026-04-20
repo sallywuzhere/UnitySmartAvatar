@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 // Push-to-talk voice loop:
 //   hold Space → record mic
-//   release     → Whisper (STT) → LLM → Kokoro (TTS)
+//   release    → Whisper (STT) → LLM → Kokoro (TTS)
 public class TestKokoro : MonoBehaviour
 {
     [Header("AI Components")]
@@ -98,7 +98,7 @@ public class TestKokoro : MonoBehaviour
         Debug.Log($"[LLM] Replied: \"{reply}\"");
         if (string.IsNullOrWhiteSpace(reply)) return;
 
-        // TTS
-        _kokoroTTS.Speak(reply, _voice);
+        // TTS struggles with apostrophes, so remove them
+        _kokoroTTS.Speak(reply.Replace("'", ""), _voice);
     }
 }

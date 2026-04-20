@@ -23,6 +23,8 @@ public class VRMBlendshapeMapper : MonoBehaviour
     [Tooltip("Higher = smoother (laggier). Lower = snappier (responsive). 0 = no smoothing.")]
     [Range(0f, 0.95f)] public float smoothing = 0.7f;
 
+    [SerializeField] private float visemeMultiplier = 1f;
+
     private SkinnedMeshRenderer[] skinnedMeshRenderers;
 
     // Cache of last frame's applied FACS weights. We lerp from these toward the new targets
@@ -110,7 +112,7 @@ public class VRMBlendshapeMapper : MonoBehaviour
             if (!Enum.TryParse(kvp.Key, out VRMBlendshape vrm)) continue;
             if (!vrmToARKitMappings.TryGetValue(vrm, out var mappings)) continue;
 
-            float phonemeWeight = kvp.Value * info.volume;
+            float phonemeWeight = kvp.Value * info.volume * visemeMultiplier;
             foreach (var m in mappings)
             {
                 targets.TryGetValue(m.name, out float current);
