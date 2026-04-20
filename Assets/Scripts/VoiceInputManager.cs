@@ -90,7 +90,7 @@ public class VoiceInputManager : MonoBehaviour
         Microphone.End(_micDeviceName);
         _isRecording = false;
 
-        _idleLookAround.StopLookingAtCamera(delaySeconds: 10);
+        _idleLookAround.StopLookingAtCamera(delaySeconds: 5);
 
         // Process user input from speech to text
         Debug.Log("[VoiceInputManager] Recording stopped. Processing Speech to Text.");
@@ -115,6 +115,6 @@ public class VoiceInputManager : MonoBehaviour
 
         // Kokoro cannot pronounce apostrophes or asterisks, so remove them :(
         Debug.Log("[VoiceInputManager] Generating voice and speaking reply!");
-        _kokoroTTS.Speak(reply.Replace("'", "").Replace("*", ""), _voice);
+        _kokoroTTS.Speak(reply.Replace("I'm", "I am").Replace("'", "").Replace("*", ""), _voice);
     }
 }

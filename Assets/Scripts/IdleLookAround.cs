@@ -62,7 +62,7 @@ public class IdleLookAround : MonoBehaviour
     private float _holdTimer;
     private float _holdDuration;
 
-    private bool _needToLookAtCamera = false;
+    private bool _needToLookAtCamera = true;
     
     public void StartLookingAtCamera()
     {
@@ -91,7 +91,7 @@ public class IdleLookAround : MonoBehaviour
         _rightEyeCurrentLocal = rightEyeBone.localRotation;
         _eyeNeutralLocal      = _leftEyeCurrentLocal;
 
-        PickNewGazeTarget();
+        StopLookingAtCamera(5);
     }
 
     private void LateUpdate()

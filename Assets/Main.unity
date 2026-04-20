@@ -395,6 +395,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmartUnityKun
       objectReference: {fileID: 0}
+    - target: {fileID: 7884185485667311841, guid: b00c6ba4380bdd04eae9206fad8635c5, type: 3}
+      propertyPath: characterPrompt
+      value: You are UnityKuun. You speak with British slang, mate! You love making
+        tea and watching rugby at the pub. You are sassy and fun. NEVER describe
+        the actions you are performing using *asterisks*. Never roleplay, never use
+        contractions or abbreviations. Keep responses to 10 words or less.
+      objectReference: {fileID: 0}
     - target: {fileID: 8800762612726702618, guid: b00c6ba4380bdd04eae9206fad8635c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
