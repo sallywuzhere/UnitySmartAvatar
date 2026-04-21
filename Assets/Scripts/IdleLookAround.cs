@@ -1,26 +1,16 @@
 using UnityEngine;
-using KokoroSharp.Core;
-using KokoroSharp.Processing;
 using System.Threading.Tasks;
 
 // Vibe Code from Claude, prompt was something like "Make me a script
 // with natural looking idle head and eye movement for a Unity character."
 
-/// <summary>
-/// Drives natural idle eye and head movement for a character.
-/// Attach to the character root or any convenient GameObject.
-///
-/// Setup:
-///   - Assign headBone (e.g. the "Head" transform in your rig)
-///   - Assign leftEyeBone and rightEyeBone if your rig has them
-///   - Tune the public fields in the Inspector to taste
-///
 /// How it works:
 ///   - Picks a random "gaze target" point in a cone in front of the character
 ///   - Smoothly rotates the head toward it (slower, smaller range)
 ///   - Smoothly rotates the eyes toward it (faster, wider range)
 ///   - Holds gaze for a random duration before picking a new target
 ///   - Eyes lead the head slightly, then head catches up (more natural)
+///   - Override option to look directly into the Camera
 /// </summary>
 public class IdleLookAround : MonoBehaviour
 {
@@ -52,10 +42,10 @@ public class IdleLookAround : MonoBehaviour
 
 
     // ── Private state ────────────────────────────────────────────────────────
-    private Vector3   _gazeWorldTarget; // current world-space gaze point
-    private Quaternion _headNeutralLocal; // rest rotation of head bone
-    private Quaternion _eyeNeutralLocal; // rest rotation of eye bones
-    private Quaternion _headCurrentLocal; // current local rotation applied to head
+    private Vector3    _lookAtTargetWorld;
+    private Quaternion _headNeutralLocal;
+    private Quaternion _eyeNeutralLocal;
+    private Quaternion _headCurrentLocal;
     private Quaternion _leftEyeCurrentLocal;
     private Quaternion _rightEyeCurrentLocal;
 
@@ -98,7 +88,7 @@ public class IdleLookAround : MonoBehaviour
     {
         if (_needToLookAtCamera)
         {
-            _gazeWorldTarget = Camera.main.transform.position;
+            _lookAtTargetWorld = Camera.main.transform.position;
         }
         else
         {
@@ -142,20 +132,20 @@ public class IdleLookAround : MonoBehaviour
         _holdTimer    = 0f;
         _holdDuration = Random.Range(minHoldTime, maxHoldTime);
 
-        // Build a random point in a cone in front of the character
-        float h = Random.Range(-horizontalRange, horizontalRange);
-        float v = Random.Range(-verticalRange, verticalRange);
+        // Find a random point in front of the character
+        float x = Random.Range(-horizontalRange, horizontalRange);
+        float y = Random.Range(-verticalRange, verticalRange);
 
-        Vector3 localDir = Quaternion.Euler(v, h, 0f) * Vector3.forward;
-        _gazeWorldTarget = transform.TransformPoint(localDir * gazeDistance);
+        Vector3 localDir = Quaternion.Euler(y, x, 0f) * Vector3.forward;
+        _lookAtTargetWorld = transform.TransformPoint(localDir * gazeDistance);
         // Vertical offset relative to camera position.
-        _gazeWorldTarget += Vector3.up * Camera.main.transform.position.y;
-        _gazeWorldTarget += Vector3.right * Camera.main.transform.position.x;
+        _lookAtTargetWorld += Vector3.up * Camera.main.transform.position.y;
+        _lookAtTargetWorld += Vector3.right * Camera.main.transform.position.x;
 
         // 25% chance we just look AT the camera
         if (Random.value < 0.25f)
         {
-            _gazeWorldTarget = Camera.main.transform.position;
+            _lookAtTargetWorld = Camera.main.transform.position;
         }
     }
 
@@ -164,13 +154,11 @@ public class IdleLookAround : MonoBehaviour
         out Quaternion desiredEyeLocal)
     {
         // Direction from head to gaze target in world space
-        Vector3 toTarget = (_gazeWorldTarget - headBone.position).normalized;
+        Vector3 toTarget = (_lookAtTargetWorld - headBone.position).normalized;
 
         // Convert to a rotation in the head bone's parent space
         // so we can clamp it and apply cleanly
-        Quaternion worldToHeadParent = Quaternion.Inverse(headBone.parent != null
-            ? headBone.parent.rotation
-            : transform.rotation);
+        Quaternion worldToHeadParent = Quaternion.Inverse(headBone.parent.rotation);
 
         Vector3 localDir = worldToHeadParent * toTarget;
 
@@ -198,7 +186,7 @@ public class IdleLookAround : MonoBehaviour
             return;
         }
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(_gazeWorldTarget, 0.05f);
-        Gizmos.DrawLine(headBone.position, _gazeWorldTarget);
+        Gizmos.DrawWireSphere(_lookAtTargetWorld, 0.05f);
+        Gizmos.DrawLine(headBone.position, _lookAtTargetWorld);
     }
 }
