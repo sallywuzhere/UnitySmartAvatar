@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using KokoroSharp;
 using KokoroSharp.Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,8 @@ public class VoiceInputManager : MonoBehaviour
     [SerializeField] private LLM _llm;
     // Control what we are looking at
     [SerializeField] private IdleLookAround _idleLookAround;
+    // Debug output
+    [SerializeField] private TextMeshProUGUI _debugText;
     
     // Text to Speech setup
     private KokoroTTS _kokoroTTS;
@@ -96,6 +99,7 @@ public class VoiceInputManager : MonoBehaviour
         Debug.Log("[VoiceInputManager] Recording stopped. Processing Speech to Text.");
         string userText = await _speechToText.GetTranscription(_inputAudioClip);
         Debug.Log($"[VoiceInputManager] User said: \"{userText}\"");
+        _debugText.text = userText;
         // Return early if we couldn't get any text from the user's voice input.
         if (string.IsNullOrWhiteSpace(userText))
         {
@@ -115,6 +119,7 @@ public class VoiceInputManager : MonoBehaviour
 
         // Kokoro cannot pronounce apostrophes or asterisks, so remove them :(
         Debug.Log("[VoiceInputManager] Generating voice and speaking reply!");
+        _debugText.text = reply;
         _kokoroTTS.Speak(reply.Replace("I'm", "I am").Replace("'", "").Replace("*", ""), _voice);
     }
 }
